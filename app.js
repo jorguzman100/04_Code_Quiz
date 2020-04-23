@@ -7,8 +7,10 @@ let questionH5 = document.querySelector("#question");
 let answersDiv = document.querySelector("#answers");
 let allDone = document.querySelector("#allDone");
 
-let totalSeconds = 10;
+let totalSeconds = 20;
+let timeRemining = totalSeconds;
 let secondsElapsed = 0;
+let discountSeconds = 0;
 let currentQuestion = 0;
 let time = setInterval(timer, 1000);
 clearInterval(time);
@@ -50,6 +52,7 @@ startBtn.addEventListener("click", startQuiz);
 answersDiv.addEventListener("click", assesSelection);
 
 function init() {
+  timeSpan.textContent = timeRemining;
   quiz.style.display = "none";
   allDone.style.display = "none";
   assesFT.style.display = "none";
@@ -63,9 +66,10 @@ function startQuiz() {
 }
 
 function timer() {
-  timeSpan.textContent = totalSeconds - secondsElapsed;
+  timeRemining = totalSeconds - secondsElapsed - 1 - discountSeconds;
+  timeSpan.textContent = timeRemining;
   secondsElapsed++;
-  if (secondsElapsed === totalSeconds + 1) {
+  if (timeRemining === 0) {
     clearInterval(time);
     disableQuestions();
     gameOver("time_out");
@@ -110,9 +114,10 @@ function assesSelection(event) {
   if (event.target.matches("button")) {
     var index = parseInt(event.target.getAttribute("data-index"));
     var timeInterval = 1000;
+    disableQuestions();
     if (quizArray[currentQuestion].correct === index) {
       displayFTAlert(true);
-      disableQuestions();
+      // disableQuestions();
       currentQuestion++;
       if (currentQuestion === quizArray.length) {
         timeInterval = 5000;
@@ -122,7 +127,12 @@ function assesSelection(event) {
         setTimeout(showQuestion, 1001);
       }
     } else {
+      discountSeconds += 3;
+      clearInterval(time);
+      time = setInterval(timer, 1000);
       displayFTAlert(false);
+      setTimeout(removeQuestionsButtons, 1000);
+      setTimeout(showQuestion, 1001);
     }
     setTimeout(function () {
       assesFT.style.display = "none";
@@ -144,8 +154,13 @@ function displayFTAlert(correct) {
       "alert alert-danger mt-0 mb-0 pt-0 pb-0 text-center"
     );
     assesFT.innerHTML =
-      "<strong>Incorrect. </strong> 5 secs. discounted. Keep trying!!";
+      "<strong>Incorrect. </strong> 3 secs. discounted. Keep trying!!";
     assesFT.style.display = "block";
+    timeSpan.style.color = "red";
+    setTimeout(function () {
+      console.log("timeOut");
+      timeSpan.style.color = "black";
+    }, 1000);
   }
 }
 
