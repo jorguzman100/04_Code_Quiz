@@ -7,13 +7,14 @@ let timeSpan = document.querySelector("#timeSpan");
 let questionH5 = document.querySelector("#question");
 let answersDiv = document.querySelector("#answers");
 let allDone = document.querySelector("#allDone");
+let finalScore = document.querySelector("#finalScore");
 
-let totalSeconds = 100;
+let totalSeconds = 5;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
 let currentQuestion = 0;
-let prog;
+let progress = 0.1;
 let time = setInterval(timer, 1000);
 clearInterval(time);
 
@@ -121,8 +122,8 @@ function assesSelection(event) {
     disableQuestions();
     if (quizArray[currentQuestion].correct === index) {
       displayFTAlert(true);
-      // disableQuestions();
       currentQuestion++;
+      updateProgress();
       if (currentQuestion === quizArray.length) {
         timeInterval = 5000;
         gameOver("questions_done");
@@ -143,6 +144,13 @@ function assesSelection(event) {
       progressBar.style.display = "block";
     }, timeInterval);
   }
+}
+
+function updateProgress() {
+  progress = Math.floor((currentQuestion / quizArray.length) * 100);
+  var styleStr = String("width: " + progress + "%; height: 100%;");
+  progressBar.firstElementChild.setAttribute("style", styleStr);
+  progressBar.firstElementChild.textContent = progress + " %";
 }
 
 function displayFTAlert(correct) {
@@ -182,11 +190,14 @@ function removeQuestionsButtons() {
 function gameOver(cause) {
   if (cause === "questions_done") {
     console.log("QUESTIONS DONE");
-    assesFT.setAttribute(
-      "class",
-      "alert alert-success mt-0 mb-0 pt-0 pb-0 text-center"
-    );
-    assesFT.innerHTML = "<strong>Quiz finished</strong> Good luck!";
+    setTimeout(() => {
+      console.log("IN TIMEOUT");
+      assesFT.setAttribute(
+        "class",
+        "alert alert-success mt-0 mb-0 pt-0 pb-0 text-center"
+      );
+      assesFT.innerHTML = "<strong>Quiz finished</strong> Good luck!";
+    }, 1500);
     clearInterval(time);
   } else if (cause === "time_out") {
     console.log("TIME OUT");
@@ -202,6 +213,7 @@ function gameOver(cause) {
   progressBar.style.display = "none";
 
   setTimeout(function () {
+    finalScore.textContent = progress;
     quiz.style.display = "none";
     allDone.style.display = "block";
     assesFT.style.display = "none";
