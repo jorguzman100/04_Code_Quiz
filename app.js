@@ -1,17 +1,19 @@
 let quiz = document.querySelector("#quiz");
 let intro = document.querySelector("#introduction");
 let assesFT = document.querySelector("#assess-ft");
+let progressBar = document.querySelector(".progress");
 let startBtn = document.querySelector("#startBtn");
 let timeSpan = document.querySelector("#timeSpan");
 let questionH5 = document.querySelector("#question");
 let answersDiv = document.querySelector("#answers");
 let allDone = document.querySelector("#allDone");
 
-let totalSeconds = 20;
+let totalSeconds = 100;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
 let currentQuestion = 0;
+let prog;
 let time = setInterval(timer, 1000);
 clearInterval(time);
 
@@ -56,12 +58,14 @@ function init() {
   quiz.style.display = "none";
   allDone.style.display = "none";
   assesFT.style.display = "none";
+  progressBar.style.display = "none";
 }
 
 function startQuiz() {
   intro.style.display = "none";
   quiz.style.display = "block";
   time = setInterval(timer, 1000);
+  progressBar.style.display = "block";
   showQuestion();
 }
 
@@ -83,7 +87,7 @@ function showQuestion() {
     questionBtn.setAttribute("type", "button");
     questionBtn.setAttribute(
       "class",
-      "list-group-item list-group-item-action list-group-item-primary mt-1 answerButton"
+      "list-group-item list-group-item-action list-group-item-info mt-1 answerButton"
     );
     questionBtn.setAttribute("data-index", i);
     questionBtn.textContent = quizArray[currentQuestion].options[i];
@@ -96,7 +100,7 @@ function disableQuestions() {
   questionsAssed.forEach((element) => {
     element.setAttribute(
       "class",
-      "list-group-item list-group-item-action list-group-item-primary mt-1 answerButton disabled"
+      "list-group-item list-group-item-action list-group-item-danger mt-1 answerButton disabled"
     );
     if (
       parseInt(element.getAttribute("data-index")) ===
@@ -136,6 +140,7 @@ function assesSelection(event) {
     }
     setTimeout(function () {
       assesFT.style.display = "none";
+      progressBar.style.display = "block";
     }, timeInterval);
   }
 }
@@ -148,6 +153,7 @@ function displayFTAlert(correct) {
     );
     assesFT.innerHTML = "<strong>Correct</strong>";
     assesFT.style.display = "block";
+    progressBar.style.display = "none";
   } else {
     assesFT.setAttribute(
       "class",
@@ -156,9 +162,9 @@ function displayFTAlert(correct) {
     assesFT.innerHTML =
       "<strong>Incorrect. </strong> 3 secs. discounted. Keep trying!!";
     assesFT.style.display = "block";
+    progressBar.style.display = "none";
     timeSpan.style.color = "red";
     setTimeout(function () {
-      console.log("timeOut");
       timeSpan.style.color = "black";
     }, 1000);
   }
@@ -193,10 +199,12 @@ function gameOver(cause) {
     return false;
   }
   assesFT.style.display = "block";
+  progressBar.style.display = "none";
 
   setTimeout(function () {
     quiz.style.display = "none";
     allDone.style.display = "block";
     assesFT.style.display = "none";
+    progressBar.style.display = "block";
   }, 5000);
 }
