@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="col text-center p-4">
+        <h3>Code Quiz Challenge</h3>
+      </div>
+
+      <div class="card">
+        <div class="card-header pt-0 pb-0">
+          <div class="row row-cols-1 row-cols-md-2">
+            <div class="col" id="viewHSA">
+              <a href="#">View Highscores</a>
+            </div>
+            <div class="col text-right">
+              <p class="mb-0" id="timeP">
+                Available Time <span id="timeSpan">xx</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <div id="introduction">
+            <h5 class="card-text">
+              Try to answer the following code-related questions within the time
+              limit.
+            </h5>
+            <h5 class="card-text">
+              Keep in mind that incorrect answers will penalize your score/time
+              by ten seconds.
+            </h5>
+            <a href="#" class="btn btn-primary" id="startBtn">Start Quiz</a>
+          </div>
+          <div id="quiz">
+            <div class="row row-cols-1 row-cols-md-2">
+              <div class="col">
+                <h5 id="question">Question 1 xxx xxxx xxx xxx xxx xxx</h5>
+              </div>
+              <div class="col">
+                <div class="list-group" id="answers"></div>
+              </div>
+            </div>
+          </div>
+          <div id="allDone">
+            <div class="alert alert-success mt-0 mb-0">
+              <h4 class="alert-heading">All Done!</h4>
+              <hr />
+              <h5 class="mb-0">Final score <span id="finalScore">xx</span></h5>
+              <hr />
+              <form class="form-inline">
+                <input
+                  class="form-control mr-2"
+                  type="text"
+                  id="initials"
+                  placeholder="Enter your initials"
+                />
+
+                <button class="btn btn-info" type="submit" id="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-muted p-0">
+          <div class="alert alert-success mt-0 mb-0 pt-0 pb-0" id="assess-ft">
+            <strong>Success</strong> Blog post added
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

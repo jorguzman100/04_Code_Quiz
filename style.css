@@ -1,0 +1,17 @@
+.card-footer {
+    height: 1.5rem;
+}
+
+#startBtn {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media(max-width: 768px) {
+    #timeP, 
+    #viewHSA {
+        text-align: center;
+    }
+}
