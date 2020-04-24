@@ -19,6 +19,47 @@
         <h3>Code Quiz Challenge</h3>
       </div>
 
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="staticBackdrop"
+        data-backdrop="static"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Modal -->
+
       <div class="card">
         <div class="card-header pt-0 pb-0">
           <div class="row row-cols-1 row-cols-md-2">
@@ -90,6 +131,36 @@
       </div>
     </div>
 
+    <!-- Audio -->
+    <audio id="audioCorrect">
+      <source
+        src="./assets/Air Plane Ding-SoundBible.com-496729130.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="audioIncorrect">
+      <source
+        src="./assets/Computer Error Alert-SoundBible.com-783113881.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="audioApplause">
+      <source
+        src="./assets/SMALL_CROWD_APPLAUSE-Yannick_Lemieux-1268806408.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="audioTollingBell">
+      <source src="./assets/tolling-bell_daniel-simion.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="audioThunder">
+      <source
+        src="./assets/Thunder-Mike_Koenig-315681025.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <!-- Scripts -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

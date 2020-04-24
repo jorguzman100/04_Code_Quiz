@@ -8,13 +8,21 @@ let questionH5 = document.querySelector("#question");
 let answersDiv = document.querySelector("#answers");
 let allDone = document.querySelector("#allDone");
 let finalScore = document.querySelector("#finalScore");
+let audioCorrect = document.querySelector("#audioCorrect");
+let audioIncorrect = document.querySelector("#audioIncorrect");
+let audioApplause = document.querySelector("#audioApplause");
+let audioTollingBell = document.querySelector("#audioTollingBell");
+let audioThunder = document.querySelector("#audioThunder");
+let submit = document.querySelector("#submit");
 
-let totalSeconds = 5;
+let totalSeconds = 20;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
 let currentQuestion = 0;
-let progress = 0.1;
+let progress = 0;
+let correctAnswers = 0;
+let correctScore = 0;
 let time = setInterval(timer, 1000);
 clearInterval(time);
 
@@ -74,7 +82,7 @@ function timer() {
   timeRemining = totalSeconds - secondsElapsed - 1 - discountSeconds;
   timeSpan.textContent = timeRemining;
   secondsElapsed++;
-  if (timeRemining === 0) {
+  if (timeRemining <= 0) {
     clearInterval(time);
     disableQuestions();
     gameOver("time_out");
@@ -122,23 +130,26 @@ function assesSelection(event) {
     disableQuestions();
     if (quizArray[currentQuestion].correct === index) {
       displayFTAlert(true);
-      currentQuestion++;
-      updateProgress();
-      if (currentQuestion === quizArray.length) {
-        timeInterval = 5000;
-        gameOver("questions_done");
-      } else {
-        setTimeout(removeQuestionsButtons, 1000);
-        setTimeout(showQuestion, 1001);
-      }
+      correctAnswers++;
     } else {
       discountSeconds += 3;
       clearInterval(time);
       time = setInterval(timer, 1000);
       displayFTAlert(false);
+      /* setTimeout(removeQuestionsButtons, 1000);
+      setTimeout(showQuestion, 1001); */
+    }
+    currentQuestion++;
+    updateProgress();
+
+    if (currentQuestion === quizArray.length) {
+      timeInterval = 5000;
+      gameOver("questions_done");
+    } else {
       setTimeout(removeQuestionsButtons, 1000);
       setTimeout(showQuestion, 1001);
     }
+
     setTimeout(function () {
       assesFT.style.display = "none";
       progressBar.style.display = "block";
@@ -151,10 +162,12 @@ function updateProgress() {
   var styleStr = String("width: " + progress + "%; height: 100%;");
   progressBar.firstElementChild.setAttribute("style", styleStr);
   progressBar.firstElementChild.textContent = progress + " %";
+  correctScore = Math.floor((correctAnswers / quizArray.length) * 100);
 }
 
 function displayFTAlert(correct) {
   if (correct) {
+    audioCorrect.play();
     assesFT.setAttribute(
       "class",
       "alert alert-success mt-0 mb-0 pt-0 pb-0 text-center"
@@ -163,6 +176,7 @@ function displayFTAlert(correct) {
     assesFT.style.display = "block";
     progressBar.style.display = "none";
   } else {
+    audioIncorrect.play();
     assesFT.setAttribute(
       "class",
       "alert alert-danger mt-0 mb-0 pt-0 pb-0 text-center"
@@ -190,8 +204,25 @@ function removeQuestionsButtons() {
 function gameOver(cause) {
   if (cause === "questions_done") {
     console.log("QUESTIONS DONE");
+    if (correctScore >= 70) {
+      setTimeout(() => {
+        audioApplause.play();
+      }, 5000);
+    } else {
+      setTimeout(() => {
+        audioThunder.play();
+      }, 5000);
+      allDone.firstElementChild.setAttribute(
+        "class",
+        "alert alert-danger mt-0 mb-0"
+      );
+      progressBar.firstElementChild.setAttribute(
+        "class",
+        "progress-bar bg-danger progress-bar-striped progress-bar-animated"
+      );
+      submit.setAttribute("class", "btn btn-danger");
+    }
     setTimeout(() => {
-      console.log("IN TIMEOUT");
       assesFT.setAttribute(
         "class",
         "alert alert-success mt-0 mb-0 pt-0 pb-0 text-center"
@@ -201,6 +232,10 @@ function gameOver(cause) {
     clearInterval(time);
   } else if (cause === "time_out") {
     console.log("TIME OUT");
+    audioTollingBell.play();
+    setTimeout(() => {
+      audioTollingBell.pause();
+    }, 4000);
     assesFT.setAttribute(
       "class",
       "alert alert-info mt-0 mb-0 pt-0 pb-0 text-center"
@@ -213,7 +248,7 @@ function gameOver(cause) {
   progressBar.style.display = "none";
 
   setTimeout(function () {
-    finalScore.textContent = progress;
+    finalScore.textContent = correctScore;
     quiz.style.display = "none";
     allDone.style.display = "block";
     assesFT.style.display = "none";
