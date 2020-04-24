@@ -14,6 +14,8 @@ let audioApplause = document.querySelector("#audioApplause");
 let audioTollingBell = document.querySelector("#audioTollingBell");
 let audioThunder = document.querySelector("#audioThunder");
 let submit = document.querySelector("#submit");
+let highScoresList = document.querySelector("#highScoresList");
+let initials = document.querySelector("#initials");
 
 let totalSeconds = 20;
 let timeRemining = totalSeconds;
@@ -23,6 +25,7 @@ let currentQuestion = 0;
 let progress = 0;
 let correctAnswers = 0;
 let correctScore = 0;
+var highscoresArray = [];
 let time = setInterval(timer, 1000);
 clearInterval(time);
 
@@ -61,13 +64,14 @@ let quizArray = [
 init();
 startBtn.addEventListener("click", startQuiz);
 answersDiv.addEventListener("click", assesSelection);
+submit.addEventListener("click", addToHighscores);
 
 function init() {
   timeSpan.textContent = timeRemining;
   quiz.style.display = "none";
   allDone.style.display = "none";
   assesFT.style.display = "none";
-  progressBar.style.display = "none";
+  // progressBar.style.display = "none";
 }
 
 function startQuiz() {
@@ -152,7 +156,7 @@ function assesSelection(event) {
 
     setTimeout(function () {
       assesFT.style.display = "none";
-      progressBar.style.display = "block";
+      // progressBar.style.display = "block";
     }, timeInterval);
   }
 }
@@ -174,7 +178,7 @@ function displayFTAlert(correct) {
     );
     assesFT.innerHTML = "<strong>Correct</strong>";
     assesFT.style.display = "block";
-    progressBar.style.display = "none";
+    // progressBar.style.display = "none";
   } else {
     audioIncorrect.play();
     assesFT.setAttribute(
@@ -184,7 +188,7 @@ function displayFTAlert(correct) {
     assesFT.innerHTML =
       "<strong>Incorrect. </strong> 3 secs. discounted. Keep trying!!";
     assesFT.style.display = "block";
-    progressBar.style.display = "none";
+    // progressBar.style.display = "none";
     timeSpan.style.color = "red";
     setTimeout(function () {
       timeSpan.style.color = "black";
@@ -216,16 +220,19 @@ function gameOver(cause) {
         "class",
         "alert alert-danger mt-0 mb-0"
       );
-      progressBar.firstElementChild.setAttribute(
-        "class",
-        "progress-bar bg-danger progress-bar-striped progress-bar-animated"
-      );
+      setTimeout(() => {
+        progressBar.firstElementChild.setAttribute(
+          "class",
+          "progress-bar bg-danger progress-bar-striped progress-bar-animated"
+        );
+      }, 5000);
+
       submit.setAttribute("class", "btn btn-danger");
     }
     setTimeout(() => {
       assesFT.setAttribute(
         "class",
-        "alert alert-success mt-0 mb-0 pt-0 pb-0 text-center"
+        "alert alert-dark mt-0 mb-0 pt-0 pb-0 text-center"
       );
       assesFT.innerHTML = "<strong>Quiz finished</strong> Good luck!";
     }, 1500);
@@ -245,13 +252,36 @@ function gameOver(cause) {
     return false;
   }
   assesFT.style.display = "block";
-  progressBar.style.display = "none";
+  // progressBar.style.display = "none";
 
   setTimeout(function () {
     finalScore.textContent = correctScore;
     quiz.style.display = "none";
     allDone.style.display = "block";
     assesFT.style.display = "none";
-    progressBar.style.display = "block";
+    // progressBar.style.display = "block";
   }, 5000);
+}
+
+function addToHighscores() {
+  var highScoreElement = document.createElement("li");
+  var highscoreStr = initials.value + " - " + correctScore;
+  highscoresArray.push(highscoreStr);
+  var highscoreArrayStr = highscoresArray.toString();
+  highScoreElement.textContent = highscoreStr;
+  if (correctScore >= 70) {
+    highScoreElement.setAttribute(
+      "class",
+      "list-group-item list-group-item-info"
+    );
+  } else {
+    highScoreElement.setAttribute(
+      "class",
+      "list-group-item list-group-item-danger"
+    );
+  }
+  highScoresList.append(highScoreElement);
+  localStorage.setItem("highscore", highscoresArray);
+  var getBackArray = localStorage.getItem("highscore").split(",");
+  console.log(getBackArray);
 }

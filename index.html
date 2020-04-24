@@ -32,7 +32,9 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <h2 class="modal-title" id="staticBackdropLabel">
+                Highscores
+              </h2>
               <button
                 type="button"
                 class="close"
@@ -43,7 +45,11 @@
               </button>
             </div>
             <div class="modal-body">
-              ...
+              <ul class="list-group" id="highScoresList">
+                <li class="list-group-item list-group-item-info">
+                  Dapibus ac facilisis in
+                </li>
+              </ul>
             </div>
             <div class="modal-footer">
               <button
@@ -53,7 +59,9 @@
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">Understood</button>
+              <button type="button" class="btn btn-primary">
+                Clear Highscores
+              </button>
             </div>
           </div>
         </div>
@@ -63,8 +71,16 @@
       <div class="card">
         <div class="card-header pt-0 pb-0">
           <div class="row row-cols-1 row-cols-md-2">
-            <div class="col" id="viewHSA">
-              <a href="#">View Highscores</a>
+            <div class="col">
+              <!-- Button trigger modal -->
+              <a
+                style="text-decoration: none;"
+                id="viewHighscores"
+                data-toggle="modal"
+                data-target="#staticBackdrop"
+                href="#"
+                >View Highscores</a
+              >
             </div>
             <div class="col text-right">
               <p class="mb-0" id="timeP">
@@ -73,7 +89,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="height: 300px;">
           <h5 class="card-title"></h5>
           <div id="introduction">
             <h5 class="card-text">
@@ -110,7 +126,7 @@
                   placeholder="Enter your initials"
                 />
 
-                <button class="btn btn-info" type="submit" id="submit">
+                <button type="submit" class="btn btn-info" id="submit">
                   Submit
                 </button>
               </form>
@@ -118,14 +134,14 @@
           </div>
         </div>
         <div class="card-footer text-muted p-0">
-          <div class="alert alert-success mt-0 mb-0 pt-0 pb-0" id="assess-ft">
-            <strong></strong>
-          </div>
           <div class="progress" style="height: 100%;">
             <div
               class="progress-bar bg-info progress-bar-striped progress-bar-animated"
               style="width: 0%; height: 100%;"
             ></div>
+          </div>
+          <div class="alert alert-success mt-0 mb-0 pt-0 pb-0" id="assess-ft">
+            <strong></strong>
           </div>
         </div>
       </div>
