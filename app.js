@@ -25,9 +25,9 @@ let currentQuestion = 0;
 let progress = 0;
 let correctAnswers = 0;
 let correctScore = 0;
-// var highscoresArray = [];
 var localHighscoresArray = [];
 let time = setInterval(timer, 1000);
+let justRegistered = false;
 clearInterval(time);
 
 let quizArray = [
@@ -69,17 +69,42 @@ submit.addEventListener("click", addToHighscores);
 $("#staticBackdrop").on("shown.bs.modal", function (e) {
   loadHighScores();
 });
-$("#staticBackdrop").on("hidden.bs.modal", function (e) {});
+$("#staticBackdrop").on("hidden.bs.modal", function (e) {
+  if (justRegistered) {
+    init();
+  }
+});
 
 function init() {
+  console.log("init()");
   timeSpan.textContent = timeRemining;
   quiz.style.display = "none";
   allDone.style.display = "none";
   assesFT.style.display = "none";
   intro.style.display = "block";
   progressBar.style.display = "none";
+
+  totalSeconds = 10;
+  timeRemining = totalSeconds;
+  secondsElapsed = 0;
+  discountSeconds = 0;
+  currentQuestion = 0;
   progress = 0;
+  correctAnswers = 0;
+  correctScore = 0;
+  justRegistered = false;
+  timeSpan.textContent = timeRemining;
+
+  localHighscoresArray = localStorage.getItem("highscore").split(",");
+  clearInterval(time);
   updateProgress();
+
+  allDone.firstElementChild.setAttribute("class", "alert alert-info mt-0 mb-0");
+  submit.setAttribute("class", "btn btn-info");
+  progressBar.firstElementChild.setAttribute(
+    "class",
+    "progress-bar bg-info progress-bar-striped progress-bar-animated"
+  );
 }
 
 function startQuiz() {
@@ -148,8 +173,6 @@ function assesSelection(event) {
       clearInterval(time);
       time = setInterval(timer, 1000);
       displayFTAlert(false);
-      /* setTimeout(removeQuestionsButtons, 1000);
-      setTimeout(showQuestion, 1001); */
     }
     currentQuestion++;
     updateProgress();
@@ -164,7 +187,6 @@ function assesSelection(event) {
 
     setTimeout(function () {
       assesFT.style.display = "none";
-      // progressBar.style.display = "block";
     }, timeInterval);
   }
 }
@@ -186,7 +208,6 @@ function displayFTAlert(correct) {
     );
     assesFT.innerHTML = "<strong>Correct</strong>";
     assesFT.style.display = "block";
-    // progressBar.style.display = "none";
   } else {
     audioIncorrect.play();
     assesFT.setAttribute(
@@ -196,7 +217,6 @@ function displayFTAlert(correct) {
     assesFT.innerHTML =
       "<strong>Incorrect. </strong> 3 secs. discounted. Keep trying!!";
     assesFT.style.display = "block";
-    // progressBar.style.display = "none";
     timeSpan.style.color = "red";
     setTimeout(function () {
       timeSpan.style.color = "black";
@@ -216,27 +236,6 @@ function removeQuestionsButtons() {
 function gameOver(cause) {
   if (cause === "questions_done") {
     console.log("QUESTIONS DONE");
-    if (correctScore >= 70) {
-      setTimeout(() => {
-        audioApplause.play();
-      }, 5000);
-    } else {
-      setTimeout(() => {
-        audioThunder.play();
-      }, 5000);
-      allDone.firstElementChild.setAttribute(
-        "class",
-        "alert alert-danger mt-0 mb-0"
-      );
-      setTimeout(() => {
-        progressBar.firstElementChild.setAttribute(
-          "class",
-          "progress-bar bg-danger progress-bar-striped progress-bar-animated"
-        );
-      }, 5000);
-
-      submit.setAttribute("class", "btn btn-danger");
-    }
     setTimeout(() => {
       assesFT.setAttribute(
         "class",
@@ -260,14 +259,30 @@ function gameOver(cause) {
     return false;
   }
   assesFT.style.display = "block";
-  // progressBar.style.display = "none";
-
+  if (correctScore >= 70) {
+    setTimeout(() => {
+      audioApplause.play();
+    }, 5000);
+  } else {
+    setTimeout(() => {
+      audioThunder.play();
+      allDone.firstElementChild.setAttribute(
+        "class",
+        "alert alert-danger mt-0 mb-0"
+      );
+      progressBar.firstElementChild.setAttribute(
+        "class",
+        "progress-bar bg-danger progress-bar-striped progress-bar-animated"
+      );
+      submit.setAttribute("class", "btn btn-danger");
+    }, 5000);
+  }
   setTimeout(function () {
     finalScore.textContent = correctScore;
     quiz.style.display = "none";
     allDone.style.display = "block";
     assesFT.style.display = "none";
-    // progressBar.style.display = "block";
+    removeQuestionsButtons();
   }, 5000);
 }
 
@@ -277,20 +292,10 @@ function addToHighscores() {
   localHighscoresArray.push(highscoreStr);
   var highscoreArrayStr = localHighscoresArray.toString();
   highScoreElement.textContent = highscoreStr;
-  /*   if (correctScore >= 70) {
-    highScoreElement.setAttribute(
-      "class",
-      "list-group-item list-group-item-info"
-    );
-  } else {
-    highScoreElement.setAttribute(
-      "class",
-      "list-group-item list-group-item-danger"
-    );
-  } */
   highScoresList.append(highScoreElement);
   localStorage.setItem("highscore", localHighscoresArray);
-
+  justRegistered = true;
+  initials.value = "";
   // Modal
   $("#staticBackdrop").modal("show");
 }
@@ -299,7 +304,7 @@ function loadHighScores() {
   while (highScoresList.hasChildNodes()) {
     highScoresList.removeChild(highScoresList.childNodes[0]);
   }
-  localHighscoresArray = localStorage.getItem("highscore").split(",");
+  // localHighscoresArray = localStorage.getItem("highscore").split(",");
   var localScore = 0;
   for (i = 0; i < localHighscoresArray.length; i++) {
     var highScoreElement = document.createElement("li");
