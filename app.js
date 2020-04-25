@@ -17,7 +17,7 @@ let submit = document.querySelector("#submit");
 let highScoresList = document.querySelector("#highScoresList");
 let initials = document.querySelector("#initials");
 
-let totalSeconds = 20;
+let totalSeconds = 10;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
@@ -25,7 +25,8 @@ let currentQuestion = 0;
 let progress = 0;
 let correctAnswers = 0;
 let correctScore = 0;
-var highscoresArray = [];
+// var highscoresArray = [];
+var localHighscoresArray = [];
 let time = setInterval(timer, 1000);
 clearInterval(time);
 
@@ -65,13 +66,20 @@ init();
 startBtn.addEventListener("click", startQuiz);
 answersDiv.addEventListener("click", assesSelection);
 submit.addEventListener("click", addToHighscores);
+$("#staticBackdrop").on("shown.bs.modal", function (e) {
+  loadHighScores();
+});
+$("#staticBackdrop").on("hidden.bs.modal", function (e) {});
 
 function init() {
   timeSpan.textContent = timeRemining;
   quiz.style.display = "none";
   allDone.style.display = "none";
   assesFT.style.display = "none";
-  // progressBar.style.display = "none";
+  intro.style.display = "block";
+  progressBar.style.display = "none";
+  progress = 0;
+  updateProgress();
 }
 
 function startQuiz() {
@@ -266,10 +274,10 @@ function gameOver(cause) {
 function addToHighscores() {
   var highScoreElement = document.createElement("li");
   var highscoreStr = initials.value + " - " + correctScore;
-  highscoresArray.push(highscoreStr);
-  var highscoreArrayStr = highscoresArray.toString();
+  localHighscoresArray.push(highscoreStr);
+  var highscoreArrayStr = localHighscoresArray.toString();
   highScoreElement.textContent = highscoreStr;
-  if (correctScore >= 70) {
+  /*   if (correctScore >= 70) {
     highScoreElement.setAttribute(
       "class",
       "list-group-item list-group-item-info"
@@ -279,9 +287,43 @@ function addToHighscores() {
       "class",
       "list-group-item list-group-item-danger"
     );
-  }
+  } */
   highScoresList.append(highScoreElement);
-  localStorage.setItem("highscore", highscoresArray);
-  var getBackArray = localStorage.getItem("highscore").split(",");
-  console.log(getBackArray);
+  localStorage.setItem("highscore", localHighscoresArray);
+
+  // Modal
+  $("#staticBackdrop").modal("show");
+}
+
+function loadHighScores() {
+  while (highScoresList.hasChildNodes()) {
+    highScoresList.removeChild(highScoresList.childNodes[0]);
+  }
+  localHighscoresArray = localStorage.getItem("highscore").split(",");
+  var localScore = 0;
+  for (i = 0; i < localHighscoresArray.length; i++) {
+    var highScoreElement = document.createElement("li");
+    highScoreElement.textContent = localHighscoresArray[i];
+    for (j = 2; j >= 0; j--) {
+      var lastPos = localHighscoresArray[i].length - 1;
+      var lastChar = localHighscoresArray[i][lastPos - j];
+      if (lastChar && lastChar >= 0 && lastChar <= 9) {
+        localScore += lastChar;
+      }
+      localScore = parseInt(localScore);
+    }
+    if (localScore >= 70) {
+      highScoreElement.setAttribute(
+        "class",
+        "list-group-item list-group-item-info"
+      );
+    } else {
+      highScoreElement.setAttribute(
+        "class",
+        "list-group-item list-group-item-danger"
+      );
+    }
+    localScore = 0;
+    highScoresList.append(highScoreElement);
+  }
 }
