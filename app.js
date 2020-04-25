@@ -16,6 +16,7 @@ let audioThunder = document.querySelector("#audioThunder");
 let submit = document.querySelector("#submit");
 let highScoresList = document.querySelector("#highScoresList");
 let initials = document.querySelector("#initials");
+let clearHighscoresBtn = document.querySelector("#clearHighscoresBtn");
 
 let totalSeconds = 10;
 let timeRemining = totalSeconds;
@@ -66,6 +67,7 @@ init();
 startBtn.addEventListener("click", startQuiz);
 answersDiv.addEventListener("click", assesSelection);
 submit.addEventListener("click", addToHighscores);
+clearHighscoresBtn.addEventListener("click", clearHighscores);
 $("#staticBackdrop").on("shown.bs.modal", function (e) {
   loadHighScores();
 });
@@ -304,7 +306,6 @@ function loadHighScores() {
   while (highScoresList.hasChildNodes()) {
     highScoresList.removeChild(highScoresList.childNodes[0]);
   }
-  // localHighscoresArray = localStorage.getItem("highscore").split(",");
   var localScore = 0;
   for (i = 0; i < localHighscoresArray.length; i++) {
     var highScoreElement = document.createElement("li");
@@ -331,4 +332,10 @@ function loadHighScores() {
     localScore = 0;
     highScoresList.append(highScoreElement);
   }
+}
+
+function clearHighscores() {
+  localHighscoresArray = [];
+  localStorage.setItem("highscore", localHighscoresArray);
+  loadHighScores();
 }
