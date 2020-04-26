@@ -18,7 +18,7 @@ let highScoresList = document.querySelector("#highScoresList");
 let initials = document.querySelector("#initials");
 let clearHighscoresBtn = document.querySelector("#clearHighscoresBtn");
 
-let totalSeconds = 10;
+let totalSeconds = 100;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
@@ -31,35 +31,140 @@ let time = setInterval(timer, 1000);
 let justRegistered = false;
 clearInterval(time);
 
+// Based on: laffgaff "DISNEY TRIVIA QUESTIONS AND ANSWERS": https://laffgaff.com/disney-trivia-questions-answers/
 let quizArray = [
   {
-    question: "Question 1 Text Text Text",
-    options: [
-      "Question 1 - Correct Answer",
-      "Question 1 - Option 2 Answer",
-      "Question 1 - Option 3 Answer",
-    ],
+    question:
+      "In The Jungle Book who teaches Mowgli about The Bare Necesseties of life?",
+    options: ["Baloo", "xxx", "xxx"],
     correct: 0,
   },
   {
-    question: "Question 2 Text Text Text",
-    options: [
-      "Question 2 - Option 1 Answer",
-      "Question 2 - Correct Answer",
-      "Question 2 - Option 3 Answer",
-      "Question 2 - Option 4 Answer",
-    ],
-    correct: 1,
+    question: "Cruella de Vil is the villain in which Disney movie?",
+    options: ["101 Dalmatians", "xxx", "xxx"],
+    correct: 0,
   },
   {
-    question: "Question 3 Text Text Text",
-    options: [
-      "Question 3 - Option 1 Answer",
-      "Question 3 - Option 2 Answer",
-      "Question 3 - Correct Answer",
-      "Question 3 - Option 4 Answer",
-    ],
-    correct: 2,
+    question:
+      "What is the name of the boy who owns Buzz Lightyear in the movie Toy Story?",
+    options: ["Andy", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "Which Disney princess has a raccoon as a sidekick?",
+    options: ["Pocahontas", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question:
+      "In the movie Frozen, which song does Elsa sing as she builds the castle?",
+    options: ["Let It Go.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question:
+      "In the movie Finding Nemo, which country has Nemo been taken to?",
+    options: ["Australia", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What is the name of Bambi’s rabbit friend?",
+    options: ["Thumper", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What does the crocodile swallow in Peter Pan?",
+    options: ["A clock.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question:
+      "In Peter Pan, did Captain Hook have a hook for his left hand or his right hand?",
+    options: ["His left hand.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question:
+      "In the movie Dumbo, what type of animal were Dandy Fat Glasses Preacher and Straw Hat??",
+    options: ["Crows", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What is the name of Donald Duck’s sister?",
+    options: ["Dumbella", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What does Cinderella’s fairy godmother turn into a carriage?",
+    options: ["A pumpkin.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question:
+      "Which was the first Disney movie to receive an Oscar nomination for Best Picture?",
+    options: ["Beauty and the Beast.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What type of animal does Jasmine have for a pet in Aladdin?",
+    options: ["A tiger called Rajah.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What is the name of The Lion King?",
+    options: ["Simba", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What type of animal is Bernard in The Rescuers?",
+    options: ["A mouse.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "The song “You Can Fly” is from which Disney movie?",
+    options: ["Peter Pan.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What color are Mickey Mouse’s shorts?",
+    options: ["Red", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What is the wizard’s name in the movie The Sword in the Stone?",
+    options: ["Merlin", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What does Dumbo use to fly?",
+    options: ["A feather.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question:
+      "Which was the first full-length animated movie to be released by Disney?",
+    options: ["Snow White and the Seven Dwarfs.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "In which city is the Disney movie Ratatouille based?",
+    options: ["Paris", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "Scar is a villain in which Disney movie?",
+    options: ["The Lion King.", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "What is Cinderella’s slipper made of?",
+    options: ["Glass", "xxx", "xxx"],
+    correct: 0,
+  },
+  {
+    question: "In The Jungle Book, what kind of animal is Shere Khan?",
+    options: ["A tiger", "xxx", "xxx"],
+    correct: 0,
   },
 ];
 
@@ -78,7 +183,6 @@ $("#staticBackdrop").on("hidden.bs.modal", function (e) {
 });
 
 function init() {
-  console.log("init()");
   timeSpan.textContent = timeRemining;
   quiz.style.display = "none";
   allDone.style.display = "none";
@@ -86,7 +190,7 @@ function init() {
   intro.style.display = "block";
   progressBar.style.display = "none";
 
-  totalSeconds = 10;
+  totalSeconds = 100;
   timeRemining = totalSeconds;
   secondsElapsed = 0;
   discountSeconds = 0;
@@ -130,6 +234,8 @@ function timer() {
 
 function showQuestion() {
   questionH5.textContent = quizArray[currentQuestion].question;
+  var optionsBtnsArray = [];
+  var indexArray = [];
   for (i = 0; i < quizArray[currentQuestion].options.length; i++) {
     var questionBtn = document.createElement("button");
     questionBtn.setAttribute("type", "button");
@@ -138,9 +244,41 @@ function showQuestion() {
       "list-group-item list-group-item-action list-group-item-info mt-1 answerButton"
     );
     questionBtn.setAttribute("data-index", i);
+    if (i === 0) {
+      questionBtn.setAttribute("correct", "yes");
+    } else {
+      questionBtn.setAttribute("correct", "no");
+    }
     questionBtn.textContent = quizArray[currentQuestion].options[i];
     answersDiv.append(questionBtn);
+    indexArray.push(i);
   }
+
+  answersDiv.childNodes.forEach(function (child) {
+    var rndIndex = Math.floor(Math.random() * indexArray.length);
+    answersDiv.append(answersDiv.children[rndIndex]);
+    indexArray.splice(rndIndex, 1);
+  });
+}
+
+// Source: w3resource "JavaScript: Randomly arrange or shuffle an array": https://www.w3resource.com/javascript-exercises/javascript-array-exercise-17.php
+function shuffle(arra1) {
+  var ctr = arra1.length,
+    temp,
+    index;
+
+  // While there are elements in the array
+  while (ctr > 0) {
+    // Pick a random index
+    index = Math.floor(Math.random() * ctr);
+    // Decrease ctr by 1
+    ctr--;
+    // And swap the last element with it
+    temp = arra1[ctr];
+    arra1[ctr] = arra1[index];
+    arra1[index] = temp;
+  }
+  return arra1;
 }
 
 function disableQuestions() {
@@ -167,7 +305,8 @@ function assesSelection(event) {
     var index = parseInt(event.target.getAttribute("data-index"));
     var timeInterval = 1000;
     disableQuestions();
-    if (quizArray[currentQuestion].correct === index) {
+    console.log(event.target.getAttribute("correct"));
+    if (event.target.getAttribute("correct") === "yes") {
       displayFTAlert(true);
       correctAnswers++;
     } else {
@@ -339,3 +478,7 @@ function clearHighscores() {
   localStorage.setItem("highscore", localHighscoresArray);
   loadHighScores();
 }
+
+sortScores();
+let numberLocalHighscoresArray = [];
+function sortScores() {}
