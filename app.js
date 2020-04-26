@@ -19,7 +19,7 @@ let initials = document.querySelector("#initials");
 let clearHighscoresBtn = document.querySelector("#clearHighscoresBtn");
 let image_area = document.querySelector("#image_area");
 
-let totalSeconds = 100000;
+let totalSeconds = 5;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
@@ -32,7 +32,7 @@ let time = setInterval(timer, 1000);
 let justRegistered = false;
 clearInterval(time);
 
-// Based on: laffgaff "DISNEY TRIVIA QUESTIONS AND ANSWERS": https://laffgaff.com/disney-trivia-questions-answers/
+// Questions based on: laffgaff "DISNEY TRIVIA QUESTIONS AND ANSWERS": https://laffgaff.com/disney-trivia-questions-answers/
 let quizArray = [
   {
     question:
@@ -217,7 +217,7 @@ function init() {
   startBtn.style.display = "block";
   progressBar.style.display = "none";
 
-  totalSeconds = 100000;
+  totalSeconds = 5;
   timeRemining = totalSeconds;
   secondsElapsed = 0;
   discountSeconds = 0;
@@ -294,26 +294,6 @@ function showQuestion() {
     answersDiv.append(answersDiv.children[rndIndex]);
     indexArray.splice(rndIndex, 1);
   });
-}
-
-// Source: w3resource "JavaScript: Randomly arrange or shuffle an array": https://www.w3resource.com/javascript-exercises/javascript-array-exercise-17.php
-function shuffle(arra1) {
-  var ctr = arra1.length,
-    temp,
-    index;
-
-  // While there are elements in the array
-  while (ctr > 0) {
-    // Pick a random index
-    index = Math.floor(Math.random() * ctr);
-    // Decrease ctr by 1
-    ctr--;
-    // And swap the last element with it
-    temp = arra1[ctr];
-    arra1[ctr] = arra1[index];
-    arra1[index] = temp;
-  }
-  return arra1;
 }
 
 function disableQuestions() {
@@ -425,6 +405,7 @@ function gameOver(cause) {
     clearInterval(time);
   } else if (cause === "time_out") {
     console.log("TIME OUT");
+    disableQuestions();
     audioTollingBell.play();
     setTimeout(() => {
       audioTollingBell.pause();
@@ -480,34 +461,117 @@ function addToHighscores() {
 }
 
 function loadHighScores() {
+  var tempHighscoresArray = [];
+  var tempHighscoresObject = {};
+  var tempHighscoresObjectsArray = [];
+  var tempLocalSCoreArray = [];
   while (highScoresList.hasChildNodes()) {
     highScoresList.removeChild(highScoresList.childNodes[0]);
   }
+  var lastPos;
+  var lastChar = "";
   var localScore = 0;
+  var localStrScore = "";
+  var tempHighscore = "";
   for (i = 0; i < localHighscoresArray.length; i++) {
-    var highScoreElement = document.createElement("li");
-    highScoreElement.textContent = localHighscoresArray[i];
-    for (j = 2; j >= 0; j--) {
-      var lastPos = localHighscoresArray[i].length - 1;
-      var lastChar = localHighscoresArray[i][lastPos - j];
+    for (j = localHighscoresArray[i].length - 1; j >= 0; j--) {
+      lastPos = localHighscoresArray[i].length - 1;
+      lastChar = localHighscoresArray[i][lastPos - j];
       if (lastChar && lastChar >= 0 && lastChar <= 9) {
         localScore += lastChar;
       }
+      if (j > 1) {
+        localStrScore += lastChar;
+      }
+
       localScore = parseInt(localScore);
     }
-    if (localScore >= 70) {
+
+    tempHighscore = localScore + localStrScore;
+    tempHighscoresArray.push(tempHighscore);
+    tempHighscoresObject.score = localScore;
+    tempHighscoresObject.scoreStr = localStrScore;
+    tempHighscoresObjectsArray.push(tempHighscoresObject);
+    tempLocalSCoreArray.push(localScore);
+    localScore = 0;
+    localStrScore = "";
+    tempHighscoresObject = {};
+  }
+  console.log("tempHighscoresObjectsArray: ", tempHighscoresObjectsArray);
+  tempLocalSCoreArray.sort(function (a, b) {
+    return b - a;
+  });
+  console.log("tempLocalSCoreArray: ", tempLocalSCoreArray);
+  var sortedScoresCompleteArray = [];
+  var flagged = [];
+  tempLocalSCoreArray.forEach(function (element) {
+    console.log(element);
+
+    tempHighscoresObjectsArray.forEach(function (object, index) {
+      if (element === object.score && !flagged.includes(index)) {
+        flagged.push(index);
+
+        var tempScoreString = object.scoreStr + " " + object.score;
+        sortedScoresCompleteArray.push(tempScoreString);
+      }
+    });
+  });
+
+  console.log("sortedScoresCompleteArray: ", sortedScoresCompleteArray);
+  for (i = 0; i < sortedScoresCompleteArray.length; i++) {
+    var highScoreElement = document.createElement("li");
+    highScoreElement.textContent = sortedScoresCompleteArray[i];
+    for (j = sortedScoresCompleteArray[i].length - 1; j >= 0; j--) {
+      lastPos = sortedScoresCompleteArray[i].length - 1;
+      lastChar = sortedScoresCompleteArray[i][lastPos - j];
+      if (lastChar && lastChar >= 0 && lastChar <= 9) {
+        localScore += lastChar;
+      }
+      if (j > 1) {
+        localStrScore += lastChar;
+      }
+
+      localScore = parseInt(localScore);
+    }
+
+    tempHighscore = localScore + localStrScore;
+
+    if (localScore > 80 && localScore <= 100) {
+      highScoreElement.setAttribute(
+        "class",
+        "list-group-item list-group-item-success"
+      );
+    } else if (localScore > 70 && localScore <= 80) {
       highScoreElement.setAttribute(
         "class",
         "list-group-item list-group-item-info"
       );
-    } else {
+    } else if (localScore > 60 && localScore <= 70) {
+      highScoreElement.setAttribute(
+        "class",
+        "list-group-item list-group-item-primary"
+      );
+    } else if (localScore > 50 && localScore <= 60) {
+      highScoreElement.setAttribute(
+        "class",
+        "list-group-item list-group-item-warning"
+      );
+    } else if (localScore <= 50) {
       highScoreElement.setAttribute(
         "class",
         "list-group-item list-group-item-danger"
       );
     }
-    localScore = 0;
+
     highScoresList.append(highScoreElement);
+    tempHighscoresArray.push(tempHighscore);
+    tempHighscoresObject.score = localScore;
+    tempHighscoresObject.scoreStr = localStrScore;
+    tempHighscoresObjectsArray.push(tempHighscoresObject);
+    tempLocalSCoreArray.push(localScore);
+    localScore = 0;
+    localStrScore = "";
+    tempHighscoresObject = {};
   }
 }
 
@@ -516,7 +580,3 @@ function clearHighscores() {
   localStorage.setItem("highscore", localHighscoresArray);
   loadHighScores();
 }
-
-sortScores();
-let numberLocalHighscoresArray = [];
-function sortScores() {}
