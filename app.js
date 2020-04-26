@@ -17,8 +17,9 @@ let submit = document.querySelector("#submit");
 let highScoresList = document.querySelector("#highScoresList");
 let initials = document.querySelector("#initials");
 let clearHighscoresBtn = document.querySelector("#clearHighscoresBtn");
+let image_area = document.querySelector("#image_area");
 
-let totalSeconds = 100;
+let totalSeconds = 100000;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
@@ -38,133 +39,158 @@ let quizArray = [
       "In The Jungle Book who teaches Mowgli about The Bare Necesseties of life?",
     options: ["Baloo", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/jungle_book.jpeg",
   },
   {
     question: "Cruella de Vil is the villain in which Disney movie?",
     options: ["101 Dalmatians", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/101_dalmatas.jpeg",
   },
   {
     question:
       "What is the name of the boy who owns Buzz Lightyear in the movie Toy Story?",
     options: ["Andy", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/toy_story.jpeg",
   },
   {
     question: "Which Disney princess has a raccoon as a sidekick?",
     options: ["Pocahontas", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/princesses.jpeg",
   },
   {
     question:
       "In the movie Frozen, which song does Elsa sing as she builds the castle?",
     options: ["Let It Go.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/frozen.jpeg",
   },
   {
     question:
       "In the movie Finding Nemo, which country has Nemo been taken to?",
     options: ["Australia", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/nemo.jpeg",
   },
   {
     question: "What is the name of Bambi’s rabbit friend?",
     options: ["Thumper", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/bambi.jpeg",
   },
   {
     question: "What does the crocodile swallow in Peter Pan?",
     options: ["A clock.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/peter_pan.jpeg",
   },
   {
     question:
       "In Peter Pan, did Captain Hook have a hook for his left hand or his right hand?",
     options: ["His left hand.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/peter_pan.jpeg",
   },
   {
     question:
       "In the movie Dumbo, what type of animal were Dandy Fat Glasses Preacher and Straw Hat??",
     options: ["Crows", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/dumbo.jpeg",
   },
   {
     question: "What is the name of Donald Duck’s sister?",
     options: ["Dumbella", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/donald_duck.jpeg",
   },
   {
     question: "What does Cinderella’s fairy godmother turn into a carriage?",
     options: ["A pumpkin.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/cinderella.jpeg",
   },
   {
     question:
       "Which was the first Disney movie to receive an Oscar nomination for Best Picture?",
     options: ["Beauty and the Beast.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "What type of animal does Jasmine have for a pet in Aladdin?",
     options: ["A tiger called Rajah.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/aladdin.jpeg",
   },
   {
     question: "What is the name of The Lion King?",
     options: ["Simba", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/lion_king.jpeg",
   },
   {
     question: "What type of animal is Bernard in The Rescuers?",
     options: ["A mouse.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/rescuers.jpeg",
   },
   {
     question: "The song “You Can Fly” is from which Disney movie?",
     options: ["Peter Pan.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "What color are Mickey Mouse’s shorts?",
     options: ["Red", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/mickey_mouse.jpeg",
   },
   {
     question: "What is the wizard’s name in the movie The Sword in the Stone?",
     options: ["Merlin", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/sword_stone.jpeg",
   },
   {
     question: "What does Dumbo use to fly?",
     options: ["A feather.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/dumbo.jpeg",
   },
   {
     question:
       "Which was the first full-length animated movie to be released by Disney?",
     options: ["Snow White and the Seven Dwarfs.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "In which city is the Disney movie Ratatouille based?",
     options: ["Paris", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/ratatouille.jpeg",
   },
   {
     question: "Scar is a villain in which Disney movie?",
     options: ["The Lion King.", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "What is Cinderella’s slipper made of?",
     options: ["Glass", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/cinderella.jpeg",
   },
   {
     question: "In The Jungle Book, what kind of animal is Shere Khan?",
     options: ["A tiger", "xxx", "xxx"],
     correct: 0,
+    image: "./assets/Disney_Trivia/jungle_book.jpeg",
   },
 ];
 
@@ -188,9 +214,10 @@ function init() {
   allDone.style.display = "none";
   assesFT.style.display = "none";
   intro.style.display = "block";
+  startBtn.style.display = "block";
   progressBar.style.display = "none";
 
-  totalSeconds = 100;
+  totalSeconds = 100000;
   timeRemining = totalSeconds;
   secondsElapsed = 0;
   discountSeconds = 0;
@@ -217,6 +244,7 @@ function init() {
 
 function startQuiz() {
   intro.style.display = "none";
+  startBtn.style.display = "none";
   quiz.style.display = "block";
   time = setInterval(timer, 1000);
   progressBar.style.display = "block";
@@ -238,6 +266,11 @@ function showQuestion() {
   questionH5.textContent = quizArray[currentQuestion].question;
   var optionsBtnsArray = [];
   var indexArray = [];
+  var image = document.createElement("img");
+  image.setAttribute("src", quizArray[currentQuestion].image);
+  image.setAttribute("class", "movie-image rounded");
+  image_area.append(image);
+
   for (i = 0; i < quizArray[currentQuestion].options.length; i++) {
     var questionBtn = document.createElement("button");
     questionBtn.setAttribute("type", "button");
@@ -373,6 +406,9 @@ function removeQuestionsButtons() {
   while (child) {
     answersDiv.removeChild(child);
     child = answersDiv.lastElementChild;
+  }
+  while (image_area.hasChildNodes()) {
+    image_area.removeChild(image_area.childNodes[0]);
   }
 }
 

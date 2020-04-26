@@ -16,7 +16,7 @@
   <body>
     <div class="container">
       <div class="col text-center p-4">
-        <h2>Robocar Poli Quiz</h2>
+        <h2>Disney Movies Quiz</h2>
       </div>
 
       <!-- Modal -->
@@ -89,31 +89,41 @@
             </div>
           </div>
         </div>
-        <div class="card-body" style="height: 300px;">
-          <h5 class="card-title"></h5>
-          <div id="introduction">
-            <h5 class="card-text">
-              Try to answer the following code-related questions within the time
-              limit.
-            </h5>
-            <h5 class="card-text">
-              Keep in mind that incorrect answers will penalize your score/time
-              by ten seconds.
-            </h5>
-            <a href="#" class="btn btn-primary mt-5" id="startBtn"
-              >Start Quiz</a
-            >
+        <div class="card-body">
+          <div class="card bg-dark text-white" id="introduction">
+            <img
+              src="./assets/Disney_Trivia/intro.jpeg"
+              class="card-img"
+              alt="disney"
+              id="intro-disney-img"
+            />
+            <div class="card-img-overlay text-center mt-3">
+              <h3 class="card-title">Welcome!!</h3>
+              <p class="card-text">
+                Try to answer the following code-related questions within the
+                time limit.
+              </p>
+              <p class="card-text">
+                Keep in mind that incorrect answers will penalize your time by 3
+                seconds.
+              </p>
+            </div>
           </div>
+          <a href="#" class="btn btn-primary" id="startBtn">Start Quiz</a>
+
+          <!-- --------- QUIZ --------- -->
           <div id="quiz">
-            <div class="row row-cols-1 row-cols-lg-2">
+            <h5 id="question">Question 1 xxx xxxx xxx xxx xxx xxx</h5>
+            <div class="row row-cols-1 row-cols-md-2">
               <div class="col">
-                <h5 id="question">Question 1 xxx xxxx xxx xxx xxx xxx</h5>
+                <div class="list-group mb-4" id="answers"></div>
               </div>
               <div class="col">
-                <div class="list-group" id="answers"></div>
+                <div id="image_area"></div>
               </div>
             </div>
           </div>
+
           <div id="allDone">
             <div class="alert alert-success mt-0 mb-0">
               <h4 class="alert-heading">All Done!</h4>
