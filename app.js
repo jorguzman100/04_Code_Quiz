@@ -201,7 +201,9 @@ function init() {
   justRegistered = false;
   timeSpan.textContent = timeRemining;
 
-  localHighscoresArray = localStorage.getItem("highscore").split(",");
+  if (localStorage.getItem("highscore")) {
+    localHighscoresArray = localStorage.getItem("highscore").split(",");
+  }
   clearInterval(time);
   updateProgress();
 
