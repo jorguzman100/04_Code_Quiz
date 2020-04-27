@@ -88,7 +88,7 @@ let quizArray = [
     question:
       "In the movie Frozen, which song does Elsa sing as she builds the castle?",
     options: [
-      "Let It Go.",
+      "Let It Go",
       "A Whole New World",
       "Part Of Your World",
       "Colors Of the Wind",
@@ -118,14 +118,14 @@ let quizArray = [
   },
   {
     question: "What does the crocodile swallow in Peter Pan?",
-    options: ["A clock.", "A bottle", "A coin", "A bracelet"],
+    options: ["A clock", "A bottle", "A coin", "A bracelet"],
     correct: 0,
     image: "./assets/Disney_Trivia/peter_pan.jpeg",
   },
   {
     question:
       "In Peter Pan, did Captain Hook have a hook for his left hand or his right hand?",
-    options: ["His left hand.", "His right hand", "None"],
+    options: ["His left hand", "His right hand"],
     correct: 0,
     image: "./assets/Disney_Trivia/peter_pan.jpeg",
   },
@@ -144,7 +144,7 @@ let quizArray = [
   },
   {
     question: "What does Cinderella’s fairy godmother turn into a carriage?",
-    options: ["A pumpkin.", "A cake", "A watermelon", "An apple"],
+    options: ["A pumpkin", "A cake", "A watermelon", "An apple"],
     correct: 0,
     image: "./assets/Disney_Trivia/cinderella.jpeg",
   },
@@ -152,7 +152,7 @@ let quizArray = [
     question:
       "Which was the first Disney movie to receive an Oscar nomination for Best Picture?",
     options: [
-      "Beauty and the Beast.",
+      "Beauty and the Beast",
       "Tron",
       "Pinocchio",
       "Lady and the Tramp",
@@ -185,14 +185,14 @@ let quizArray = [
   },
   {
     question: "What type of animal is Bernard in The Rescuers?",
-    options: ["A mouse.", "A cat", "A dog", "A horse", "An eagle"],
+    options: ["A mouse", "A cat", "A dog", "A horse", "An eagle"],
     correct: 0,
     image: "./assets/Disney_Trivia/rescuers.jpeg",
   },
   {
     question: "The song “You Can Fly” is from which Disney movie?",
     options: [
-      "Peter Pan.",
+      "Peter Pan",
       "Robin Hood",
       "Lolo & Stitch",
       "The Aristocats",
@@ -216,7 +216,7 @@ let quizArray = [
   },
   {
     question: "What does Dumbo use to fly?",
-    options: ["A feather.", "A hat", "A botle", "A lamp"],
+    options: ["A feather", "A hat", "A botle", "A lamp"],
     correct: 0,
     image: "./assets/Disney_Trivia/dumbo.jpeg",
   },
@@ -224,7 +224,7 @@ let quizArray = [
     question:
       "Which was the first full-length animated movie to be released by Disney?",
     options: [
-      "Snow White and the Seven Dwarfs.",
+      "Snow White and the Seven Dwarfs",
       "The Lottle Mermaid",
       "Mickey Mouse",
       "Donald Duck",
@@ -240,7 +240,7 @@ let quizArray = [
   },
   {
     question: "Scar is a villain in which Disney movie?",
-    options: ["The Lion King.", "Beauty and the Best", "Hercules", "Aladdin"],
+    options: ["The Lion King", "Beauty and the Best", "Hercules", "Aladdin"],
     correct: 0,
     image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },

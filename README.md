@@ -1,47 +1,47 @@
 # 04_Code_Quiz
-A timed code quiz with multiple-choice questions
+A timed code quiz with multiple-choice questions. \
+Built with HTML, CSS, Bootstrap library and JavaScript.
 
----------------------------------------------------------------
-# 04 Web APIs: Code Quiz
+## The Challenge
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. Build a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
+It is required to create a quiz application, which will include multiple-choice questions, a timer, and the possibility to register Highscores.
 
-## User Story
+Main elements:
+- [x] Intro section with instructions.
+- [x] Questions display with answers displaying in random order.
+- [x] Inmediate visual and audio feedback for the asnwered questions.
+- [x] A timer.
+- [x] Highscores sortered and registered with localStorage.
 
-```
-AS A coding bootcamp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
 
-## Acceptance Criteria
+Additional given characteristics:
+This app will run in the browser and feature dynamically updated HTML and CSS powered by JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score
-```
 
-The following animation demonstrates the application functionality:
+## The  development process
 
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
+In order to accomplish the challenge, the following steps were executed:
+1. Understand the challenge and the expected flow for the app.
+2. Define complementary breakdown pseudo-code.
+3. Code each breackdown element.
+4. Test, try and error, and apply corrections.
+5. Write proper documentation comments to main code parts.
 
-### Review
+## The Output
 
-You are required to submit the following for review:
+With the described process we were able to create a efficient and responsive application that generates passwords according to user's criteria.
 
-* The URL of the functional, deployed application.
+__The application__
+![](./Assets/screen_shot1.png) 
+![](./Assets/screen_shot2.png)
+![](./Assets/screen_shot3.png)
+![](./Assets/screen_shot4.png)
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
 
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+## Installation
 
+The project was uploaded to [GitHub](https://github.com/) at the following repository:
+[https://github.com/jorguzman100/04_Code_Quiz](https://github.com/jorguzman100/04_Code_Quiz)
+
+You can access the deployed application with the GitHup Pages link:
+[https://jorguzman100.github.io/04_Code_Quiz/](https://jorguzman100.github.io/04_Code_Quiz/)
