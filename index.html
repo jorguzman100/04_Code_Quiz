@@ -3,24 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="./style.css" />
+
     <title>Document</title>
   </head>
 
   <body>
+    <!-- Container -->
     <div class="container">
-      <div class="col text-center p-4">
+      <!-- Header -->
+      <header class="col text-center p-4">
         <h2>Disney Movies Quiz</h2>
-      </div>
+      </header>
+      <!-- /Header -->
 
-      <!-- Modal -->
-      <div
+      <!-- Highscores Modal -->
+      <section
         class="modal fade"
         id="staticBackdrop"
         data-backdrop="static"
@@ -65,12 +73,14 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- /Modal -->
+      </section>
+      <!-- /Highscores Modal -->
 
-      <div class="card">
-        <div class="card-header pt-0 pb-0">
-          <div class="row row-cols-1 row-cols-md-2">
+      <!-- The Main Card -->
+      <section class="card">
+        <!-- Card Header -->
+        <section class="card-header pt-0 pb-0">
+          <div class="row row-cols-2">
             <div class="col">
               <!-- Button trigger modal -->
               <a
@@ -88,9 +98,13 @@
               </p>
             </div>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="card bg-dark text-white" id="introduction">
+        </section>
+        <!-- /Card Header -->
+
+        <!-- Card Body -->
+        <section class="card-body">
+          <!-- Quiz Introduction -->
+          <section class="card bg-dark text-white" id="introduction">
             <img
               src="./assets/Disney_Trivia/intro.jpeg"
               class="card-img"
@@ -108,11 +122,12 @@
                 seconds.
               </p>
             </div>
-          </div>
+          </section>
           <a href="#" class="btn btn-primary" id="startBtn">Start Quiz</a>
+          <!-- /Quiz Introduction -->
 
-          <!-- --------- QUIZ --------- -->
-          <div id="quiz">
+          <!-- Quiz -->
+          <section id="quiz">
             <h5 id="question">Question 1 xxx xxxx xxx xxx xxx xxx</h5>
             <div class="row row-cols-1 row-cols-md-2">
               <div class="col">
@@ -122,9 +137,11 @@
                 <div id="image_area"></div>
               </div>
             </div>
-          </div>
+          </section>
+          <!-- /Quiz -->
 
-          <div id="allDone">
+          <!-- All Done -->
+          <section id="allDone">
             <div class="alert alert-success mt-0 mb-0">
               <h4 class="alert-heading">All Done!</h4>
               <hr />
@@ -137,14 +154,17 @@
                   id="initials"
                   placeholder="Enter your initials"
                 />
-
                 <button type="submit" class="btn btn-info" id="submit">
                   Submit
                 </button>
               </form>
             </div>
-          </div>
-        </div>
+          </section>
+          <!-- /All Done -->
+        </section>
+        <!-- /Card Body -->
+
+        <!-- Card Footer -->
         <div class="card-footer text-muted p-0">
           <div class="progress" style="height: 100%;">
             <div
@@ -156,54 +176,66 @@
             <strong></strong>
           </div>
         </div>
-      </div>
+        <!-- /Card Footer -->
+      </section>
+      <!-- /The Main Card -->
     </div>
+    <!-- / Container -->
 
     <!-- Audio -->
     <audio id="audioCorrect">
       <source
-        src="./assets/Air Plane Ding-SoundBible.com-496729130.mp3"
+        src="./assets/audios/Air Plane Ding-SoundBible.com-496729130.mp3"
         type="audio/mpeg"
       />
     </audio>
     <audio id="audioIncorrect">
       <source
-        src="./assets/Computer Error Alert-SoundBible.com-783113881.mp3"
+        src="./assets/audios/Computer Error Alert-SoundBible.com-783113881.mp3"
         type="audio/mpeg"
       />
     </audio>
     <audio id="audioApplause">
       <source
-        src="./assets/SMALL_CROWD_APPLAUSE-Yannick_Lemieux-1268806408.mp3"
+        src="./assets/audios/SMALL_CROWD_APPLAUSE-Yannick_Lemieux-1268806408.mp3"
         type="audio/mpeg"
       />
     </audio>
     <audio id="audioTollingBell">
-      <source src="./assets/tolling-bell_daniel-simion.mp3" type="audio/mpeg" />
+      <source
+        src="./assets/audios/tolling-bell_daniel-simion.mp3"
+        type="audio/mpeg"
+      />
     </audio>
     <audio id="audioThunder">
       <source
-        src="./assets/Thunder-Mike_Koenig-315681025.mp3"
+        src="./assets/audios/Thunder-Mike_Koenig-315681025.mp3"
         type="audio/mpeg"
       />
     </audio>
 
-    <!-- Scripts -->
+    <!-- jQuery -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Bootstrap -->
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Main JavaScript -->
     <script src="./app.js"></script>
   </body>
 </html>
