@@ -1,3 +1,5 @@
+/* --------------- Query Selectors --------------- */
+
 let quiz = document.querySelector("#quiz");
 let intro = document.querySelector("#introduction");
 let assesFT = document.querySelector("#assess-ft");
@@ -19,6 +21,8 @@ let initials = document.querySelector("#initials");
 let clearHighscoresBtn = document.querySelector("#clearHighscoresBtn");
 let image_area = document.querySelector("#image_area");
 
+/* ------- Global Variable Declarations ------- */
+
 let totalSeconds = 250;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
@@ -31,6 +35,8 @@ var localHighscoresArray = [];
 let time = setInterval(timer, 1000);
 let justRegistered = false;
 clearInterval(time);
+
+/* --------------- Quiz Array --------------- */
 
 // Questions based on: laffgaff "DISNEY TRIVIA QUESTIONS AND ANSWERS": https://laffgaff.com/disney-trivia-questions-answers/
 let quizArray = [
@@ -265,7 +271,8 @@ let quizArray = [
   },
 ];
 
-init();
+/* ------------- Event Management ------------- */
+
 startBtn.addEventListener("click", startQuiz);
 answersDiv.addEventListener("click", assesSelection);
 submit.addEventListener("click", addToHighscores);
@@ -278,6 +285,10 @@ $("#staticBackdrop").on("hidden.bs.modal", function (e) {
     init();
   }
 });
+
+init();
+
+/* ------------- Functions Declaration ------------- */
 
 function init() {
   timeSpan.textContent = timeRemining;
@@ -391,7 +402,6 @@ function assesSelection(event) {
     var index = parseInt(event.target.getAttribute("data-index"));
     var timeInterval = 1000;
     disableQuestions();
-    console.log(event.target.getAttribute("correct"));
     if (event.target.getAttribute("correct") === "yes") {
       displayFTAlert(true);
       correctAnswers++;
@@ -544,9 +554,7 @@ function loadHighScores() {
   var localScore = 0;
   var localStrScore = "";
   var tempHighscore = "";
-  console.log("localHighscoresArray: ", localHighscoresArray);
   for (i = 0; i < localHighscoresArray.length; i++) {
-    // tempLocalSCoreArray = [];
     for (j = localHighscoresArray[i].length - 1; j >= 0; j--) {
       lastPos = localHighscoresArray[i].length - 1;
       lastChar = localHighscoresArray[i][lastPos - j];
@@ -555,7 +563,6 @@ function loadHighScores() {
       }
       if (j > 1) {
         if (j === 2 && lastChar === "1") {
-          console.log("lastChar: ", lastChar);
         }
         localStrScore += lastChar;
       }
@@ -569,24 +576,17 @@ function loadHighScores() {
     tempHighscoresObject.scoreStr = localStrScore;
 
     tempHighscoresObjectsArray.push(tempHighscoresObject);
-    console.log("localScore: ", localScore);
     tempLocalSCoreArray.push(localScore);
-    console.log("tempLocalSCoreArray: ", tempLocalSCoreArray);
     localScore = 0;
     localStrScore = "";
     tempHighscoresObject = {};
   }
-
-  console.log("tempLocalSCoreArray: ", tempLocalSCoreArray);
-  console.log("------------------------------------------------------------");
   tempLocalSCoreArray.sort(function (a, b) {
     return b - a;
   });
   var sortedScoresCompleteArray = [];
   var flagged = [];
   tempLocalSCoreArray.forEach(function (element) {
-    console.log(element);
-
     tempHighscoresObjectsArray.forEach(function (object, index) {
       if (element === object.score && !flagged.includes(index)) {
         flagged.push(index);
@@ -596,8 +596,6 @@ function loadHighScores() {
       }
     });
   });
-  console.log("------------------------------------------------------------");
-  console.log("sortedScoresCompleteArray: ", sortedScoresCompleteArray);
   for (i = 0; i < sortedScoresCompleteArray.length; i++) {
     var highScoreElement = document.createElement("li");
     highScoreElement.textContent = sortedScoresCompleteArray[i];
@@ -647,7 +645,6 @@ function loadHighScores() {
     tempHighscoresArray.push(tempHighscore);
     tempHighscoresObject.score = localScore;
     tempHighscoresObject.scoreStr = localStrScore;
-    console.log("second tempHighscoresObject", tempHighscoresObject);
     tempHighscoresObjectsArray.push(tempHighscoresObject);
     tempLocalSCoreArray.push(localScore);
     localScore = 0;
