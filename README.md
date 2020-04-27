@@ -29,7 +29,7 @@ In order to accomplish the challenge, the following steps were executed:
 
 ## The Output
 
-With the described process we were able to create a efficient and responsive application that generates passwords according to user's criteria.
+With the described process we were able to create a efficient and responsive quiz application that display questions, provide feedback, show images, provide highscores, all in a friendly manner within the Disney movies context.
 
 __The application__
 ![](./assets/screen_shots/screen_shot1.png) 
