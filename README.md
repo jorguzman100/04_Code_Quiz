@@ -32,11 +32,11 @@ In order to accomplish the challenge, the following steps were executed:
 With the described process we were able to create a efficient and responsive application that generates passwords according to user's criteria.
 
 __The application__
-![](./Assets/screen_shots/screen_shot1.png) 
-![](./Assets/screen_shots/screen_shot2.png)
-![](./Assets/screen_shots/screen_shot3.png)
-![](./Assets/screen_shots/screen_shot4.png)
-![](./Assets/screen_shots/screen_shot5.png)
+![](./assets/screen_shots/screen_shot1.png) 
+![](./assets/screen_shots/screen_shot2.png)
+![](./assets/screen_shots/screen_shot3.png)
+![](./assets/screen_shots/screen_shot4.png)
+![](./assets/screen_shots/screen_shot5.png)
 
 
 ## Installation
