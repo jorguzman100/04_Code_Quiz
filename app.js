@@ -19,7 +19,7 @@ let initials = document.querySelector("#initials");
 let clearHighscoresBtn = document.querySelector("#clearHighscoresBtn");
 let image_area = document.querySelector("#image_area");
 
-let totalSeconds = 5;
+let totalSeconds = 250;
 let timeRemining = totalSeconds;
 let secondsElapsed = 0;
 let discountSeconds = 0;
@@ -37,158 +37,229 @@ let quizArray = [
   {
     question:
       "In The Jungle Book who teaches Mowgli about The Bare Necesseties of life?",
-    options: ["Baloo", "xxx", "xxx"],
+    options: ["Baloo", "Shere Khan", "Kaa", "King Louie", "Bagheera"],
     correct: 0,
     image: "./assets/Disney_Trivia/jungle_book.jpeg",
   },
   {
     question: "Cruella de Vil is the villain in which Disney movie?",
-    options: ["101 Dalmatians", "xxx", "xxx"],
+    options: [
+      "101 Dalmatians",
+      "The Little Mermaid",
+      "Mulan",
+      "The Lion King",
+      "Aladdin",
+      "Hercules",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/101_dalmatas.jpeg",
   },
   {
     question:
       "What is the name of the boy who owns Buzz Lightyear in the movie Toy Story?",
-    options: ["Andy", "xxx", "xxx"],
+    options: [
+      "Andy",
+      "Jessie",
+      "Forkie",
+      "Sheriff Woody",
+      "Sid",
+      "Bonnie",
+      "Ryan",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/toy_story.jpeg",
   },
   {
     question: "Which Disney princess has a raccoon as a sidekick?",
-    options: ["Pocahontas", "xxx", "xxx"],
+    options: [
+      "Pocahontas",
+      "Ariel",
+      "Jasmine",
+      "Belle",
+      "Merida",
+      "Rapunzel",
+      "Cinderella",
+      "Snow White",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/princesses.jpeg",
   },
   {
     question:
       "In the movie Frozen, which song does Elsa sing as she builds the castle?",
-    options: ["Let It Go.", "xxx", "xxx"],
+    options: [
+      "Let It Go.",
+      "A Whole New World",
+      "Part Of Your World",
+      "Colors Of the Wind",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/frozen.jpeg",
   },
   {
     question:
       "In the movie Finding Nemo, which country has Nemo been taken to?",
-    options: ["Australia", "xxx", "xxx"],
+    options: [
+      "Australia",
+      "Mexico",
+      "United States",
+      "China",
+      "Japan",
+      "Sweden",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/nemo.jpeg",
   },
   {
     question: "What is the name of Bambi’s rabbit friend?",
-    options: ["Thumper", "xxx", "xxx"],
+    options: ["Thumper", "Faline", "Flower", "Friend Owl"],
     correct: 0,
     image: "./assets/Disney_Trivia/bambi.jpeg",
   },
   {
     question: "What does the crocodile swallow in Peter Pan?",
-    options: ["A clock.", "xxx", "xxx"],
+    options: ["A clock.", "A bottle", "A coin", "A bracelet"],
     correct: 0,
     image: "./assets/Disney_Trivia/peter_pan.jpeg",
   },
   {
     question:
       "In Peter Pan, did Captain Hook have a hook for his left hand or his right hand?",
-    options: ["His left hand.", "xxx", "xxx"],
+    options: ["His left hand.", "His right hand", "None"],
     correct: 0,
     image: "./assets/Disney_Trivia/peter_pan.jpeg",
   },
   {
     question:
       "In the movie Dumbo, what type of animal were Dandy Fat Glasses Preacher and Straw Hat??",
-    options: ["Crows", "xxx", "xxx"],
+    options: ["Crows", "Eagles", "Cats", "Horses", "Dogs"],
     correct: 0,
     image: "./assets/Disney_Trivia/dumbo.jpeg",
   },
   {
     question: "What is the name of Donald Duck’s sister?",
-    options: ["Dumbella", "xxx", "xxx"],
+    options: ["Dumbella", "Daisy", "Louie"],
     correct: 0,
     image: "./assets/Disney_Trivia/donald_duck.jpeg",
   },
   {
     question: "What does Cinderella’s fairy godmother turn into a carriage?",
-    options: ["A pumpkin.", "xxx", "xxx"],
+    options: ["A pumpkin.", "A cake", "A watermelon", "An apple"],
     correct: 0,
     image: "./assets/Disney_Trivia/cinderella.jpeg",
   },
   {
     question:
       "Which was the first Disney movie to receive an Oscar nomination for Best Picture?",
-    options: ["Beauty and the Beast.", "xxx", "xxx"],
+    options: [
+      "Beauty and the Beast.",
+      "Tron",
+      "Pinocchio",
+      "Lady and the Tramp",
+      "Treasure Planet",
+      "Robin Hood",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "What type of animal does Jasmine have for a pet in Aladdin?",
-    options: ["A tiger called Rajah.", "xxx", "xxx"],
+    options: ["A tiger", "A pig", "A cat", "A hampster"],
     correct: 0,
     image: "./assets/Disney_Trivia/aladdin.jpeg",
   },
   {
     question: "What is the name of The Lion King?",
-    options: ["Simba", "xxx", "xxx"],
+    options: [
+      "Simba",
+      "Scar",
+      "Nala",
+      "Mufasa",
+      "Zazu",
+      "Timon",
+      "Pumbaa",
+      "Sarabi",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/lion_king.jpeg",
   },
   {
     question: "What type of animal is Bernard in The Rescuers?",
-    options: ["A mouse.", "xxx", "xxx"],
+    options: ["A mouse.", "A cat", "A dog", "A horse", "An eagle"],
     correct: 0,
     image: "./assets/Disney_Trivia/rescuers.jpeg",
   },
   {
     question: "The song “You Can Fly” is from which Disney movie?",
-    options: ["Peter Pan.", "xxx", "xxx"],
+    options: [
+      "Peter Pan.",
+      "Robin Hood",
+      "Lolo & Stitch",
+      "The Aristocats",
+      "Cinderella",
+      "Mulan",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "What color are Mickey Mouse’s shorts?",
-    options: ["Red", "xxx", "xxx"],
+    options: ["Red", "Green", "Blue", "Yellow"],
     correct: 0,
     image: "./assets/Disney_Trivia/mickey_mouse.jpeg",
   },
   {
     question: "What is the wizard’s name in the movie The Sword in the Stone?",
-    options: ["Merlin", "xxx", "xxx"],
+    options: ["Merlin", "Arthur", "Archimedes", "Sir Kay"],
     correct: 0,
     image: "./assets/Disney_Trivia/sword_stone.jpeg",
   },
   {
     question: "What does Dumbo use to fly?",
-    options: ["A feather.", "xxx", "xxx"],
+    options: ["A feather.", "A hat", "A botle", "A lamp"],
     correct: 0,
     image: "./assets/Disney_Trivia/dumbo.jpeg",
   },
   {
     question:
       "Which was the first full-length animated movie to be released by Disney?",
-    options: ["Snow White and the Seven Dwarfs.", "xxx", "xxx"],
+    options: [
+      "Snow White and the Seven Dwarfs.",
+      "The Lottle Mermaid",
+      "Mickey Mouse",
+      "Donald Duck",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "In which city is the Disney movie Ratatouille based?",
-    options: ["Paris", "xxx", "xxx"],
+    options: ["Paris", "Tokio", "Brussels", "Tallinn", "New York"],
     correct: 0,
     image: "./assets/Disney_Trivia/ratatouille.jpeg",
   },
   {
     question: "Scar is a villain in which Disney movie?",
-    options: ["The Lion King.", "xxx", "xxx"],
+    options: ["The Lion King.", "Beauty and the Best", "Hercules", "Aladdin"],
     correct: 0,
     image: "./assets/Disney_Trivia/disney_movies.jpeg",
   },
   {
     question: "What is Cinderella’s slipper made of?",
-    options: ["Glass", "xxx", "xxx"],
+    options: ["Glass", "Plastic", "Rubber", "leather", "Wood"],
     correct: 0,
     image: "./assets/Disney_Trivia/cinderella.jpeg",
   },
   {
     question: "In The Jungle Book, what kind of animal is Shere Khan?",
-    options: ["A tiger", "xxx", "xxx"],
+    options: [
+      "A tiger",
+      "A panda",
+      "A snake",
+      "A cocodrile",
+      "A hipo",
+      "A panther",
+    ],
     correct: 0,
     image: "./assets/Disney_Trivia/jungle_book.jpeg",
   },
@@ -217,7 +288,7 @@ function init() {
   startBtn.style.display = "block";
   progressBar.style.display = "none";
 
-  totalSeconds = 5;
+  totalSeconds = 250;
   timeRemining = totalSeconds;
   secondsElapsed = 0;
   discountSeconds = 0;
@@ -473,7 +544,9 @@ function loadHighScores() {
   var localScore = 0;
   var localStrScore = "";
   var tempHighscore = "";
+  console.log("localHighscoresArray: ", localHighscoresArray);
   for (i = 0; i < localHighscoresArray.length; i++) {
+    // tempLocalSCoreArray = [];
     for (j = localHighscoresArray[i].length - 1; j >= 0; j--) {
       lastPos = localHighscoresArray[i].length - 1;
       lastChar = localHighscoresArray[i][lastPos - j];
@@ -481,6 +554,9 @@ function loadHighScores() {
         localScore += lastChar;
       }
       if (j > 1) {
+        if (j === 2 && lastChar === "1") {
+          console.log("lastChar: ", lastChar);
+        }
         localStrScore += lastChar;
       }
 
@@ -491,17 +567,21 @@ function loadHighScores() {
     tempHighscoresArray.push(tempHighscore);
     tempHighscoresObject.score = localScore;
     tempHighscoresObject.scoreStr = localStrScore;
+
     tempHighscoresObjectsArray.push(tempHighscoresObject);
+    console.log("localScore: ", localScore);
     tempLocalSCoreArray.push(localScore);
+    console.log("tempLocalSCoreArray: ", tempLocalSCoreArray);
     localScore = 0;
     localStrScore = "";
     tempHighscoresObject = {};
   }
-  console.log("tempHighscoresObjectsArray: ", tempHighscoresObjectsArray);
+
+  console.log("tempLocalSCoreArray: ", tempLocalSCoreArray);
+  console.log("------------------------------------------------------------");
   tempLocalSCoreArray.sort(function (a, b) {
     return b - a;
   });
-  console.log("tempLocalSCoreArray: ", tempLocalSCoreArray);
   var sortedScoresCompleteArray = [];
   var flagged = [];
   tempLocalSCoreArray.forEach(function (element) {
@@ -516,7 +596,7 @@ function loadHighScores() {
       }
     });
   });
-
+  console.log("------------------------------------------------------------");
   console.log("sortedScoresCompleteArray: ", sortedScoresCompleteArray);
   for (i = 0; i < sortedScoresCompleteArray.length; i++) {
     var highScoreElement = document.createElement("li");
@@ -567,6 +647,7 @@ function loadHighScores() {
     tempHighscoresArray.push(tempHighscore);
     tempHighscoresObject.score = localScore;
     tempHighscoresObject.scoreStr = localStrScore;
+    console.log("second tempHighscoresObject", tempHighscoresObject);
     tempHighscoresObjectsArray.push(tempHighscoresObject);
     tempLocalSCoreArray.push(localScore);
     localScore = 0;
